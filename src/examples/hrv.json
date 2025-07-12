@@ -1,0 +1,1070 @@
+{
+  "_id": {
+    "$oid": "6862dbace4fe7ea2882b45f4"
+  },
+  "data": [
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 94
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 92
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 84
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 104
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 119
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 104
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 99
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T00:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 110
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 110
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 114
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 118
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 124
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 131
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 119
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 117
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 108
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 130
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 137
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 148
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T01:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 148
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 134
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 134
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 122
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 128
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 130
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 146
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 144
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 155
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 136
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 144
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 133
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T02:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 155
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 143
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 124
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 129
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 132
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 88
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 106
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 111
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 95
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 116
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 121
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 133
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T03:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 116
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 133
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 144
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 132
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 136
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 134
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 127
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 123
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 121
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 131
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 141
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 154
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T04:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 128
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 126
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 118
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 122
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 110
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 126
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 129
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 127
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 141
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 133
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T05:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 124
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 137
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 137
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 156
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 161
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 149
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 169
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 172
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 141
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 117
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 106
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 110
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T06:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 98
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 108
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 93
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 111
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 106
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 103
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 109
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 112
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 121
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:42:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 134
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 125
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T07:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 130
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 116
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:12:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 114
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 116
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 123
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 134
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 138
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:37:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 116
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:47:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 107
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:52:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 97
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T08:57:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 112
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:02:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 112
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:07:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 114
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:17:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 104
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:22:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 109
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:27:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 77
+    },
+    {
+      "timestamp": {
+        "$date": "2025-07-02T09:32:29.000Z"
+      },
+      "timezone_offset": 7200,
+      "type": null,
+      "unit": "rmssd",
+      "tags": [],
+      "value": 82
+    }
+  ],
+  "userId": {
+    "$oid": "66955bbf8b55fd3b498af3ad"
+  },
+  "provider": {
+    "logo": "https://storage.googleapis.com/vital-assets/oura.png",
+    "name": "Oura",
+    "slug": "oura"
+  },
+  "source": {
+    "provider": "oura",
+    "type": "ring"
+  },
+  "source_id": 1
+}

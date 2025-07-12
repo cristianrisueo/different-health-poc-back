@@ -1,0 +1,167 @@
+{
+  "_id": {
+    "$oid": "672e573ce3a563b6926cad4b"
+  },
+  "userId": {
+    "$oid": "66955bbf8b55fd3b498af3ad"
+  },
+  "pdfURL": "example",
+  "imageURL": "example",
+  "patientInformation": {
+    "height": {
+      "result": 74
+    },
+    "weight": {
+      "result": 195
+    },
+    "age": {
+      "result": 35
+    }
+  },
+  "bodyComposition": {
+    "leftArm": {
+      "fatMass": 1.49,
+      "leanBMC": 9.77,
+      "totalMass": 11.26,
+      "fatPercent": 13.2
+    },
+    "leftLeg": {
+      "fatMass": 6.22,
+      "leanBMC": 26.51,
+      "totalMass": 32.73,
+      "fatPercent": 19
+    },
+    "rightArm": {
+      "fatMass": 1.47,
+      "leanBMC": 10.37,
+      "totalMass": 11.84,
+      "fatPercent": 12.5
+    },
+    "rightLeg": {
+      "fatMass": 5.93,
+      "leanBMC": 26.94,
+      "totalMass": 32.88,
+      "fatPercent": 18
+    },
+    "trunk": {
+      "fatMass": 15.56,
+      "leanBMC": 72.75,
+      "totalMass": 88.32,
+      "fatPercent": 17.6
+    },
+    "head": {
+      "fatMass": 2.38,
+      "leanBMC": 8.51,
+      "totalMass": 10.89,
+      "fatPercent": 21.8
+    }
+  },
+  "adiposeIndices": {
+    "androidGynoidRatio": {
+      "result": 1.07
+    },
+    "fatMassHeight": {
+      "result": 4.24
+    },
+    "fatTrunkfatLegs": {
+      "result": 0.95
+    },
+    "totalBodyFat": {
+      "result": 17.6
+    },
+    "trunkLimbFatMass": {
+      "result": 1.03
+    },
+    "vatArea": {
+      "result": 95
+    },
+    "vatMass": {
+      "result": 458
+    },
+    "vatVolume": {
+      "result": 495
+    }
+  },
+  "leanIndices": {
+    "appenLeanHeight": {
+      "result": 8.94
+    },
+    "leanHeight": {
+      "result": 18.9
+    }
+  },
+  "resultSummary": {
+    "head": {
+      "bmc": 565.16,
+      "fatMass": 1078.6,
+      "fatPercent": 21.8,
+      "leanBMC": 3860.8,
+      "leanMass": 3295.6,
+      "totalMass": 4939.4
+    },
+    "leftArm": {
+      "bmc": 229.31,
+      "fatMass": 676.1,
+      "fatPercent": 13.2,
+      "leanBMC": 4431.6,
+      "leanMass": 4202.3,
+      "totalMass": 5107.7
+    },
+    "leftLeg": {
+      "bmc": 682.72,
+      "fatMass": 2819.1,
+      "fatPercent": 19,
+      "leanBMC": 12025.1,
+      "leanMass": 11342.4,
+      "totalMass": 14844.3
+    },
+    "rightArm": {
+      "bmc": 254.45,
+      "fatMass": 668.8,
+      "fatPercent": 12.5,
+      "leanBMC": 4702.4,
+      "leanMass": 4448,
+      "totalMass": 5371.2
+    },
+    "rightLeg": {
+      "bmc": 647.46,
+      "fatMass": 2690.1,
+      "fatPercent": 18,
+      "leanBMC": 12221.9,
+      "leanMass": 11574.4,
+      "totalMass": 14912
+    },
+    "subtotal": {
+      "bmc": 2748.86,
+      "fatMass": 13913,
+      "fatPercent": 17.3,
+      "leanBMC": 66381.7,
+      "leanMass": 63632.8,
+      "totalMass": 80294.7
+    },
+    "total": {
+      "bmc": 3314.03,
+      "fatMass": 14991.6,
+      "fatPercent": 17.6,
+      "leanBMC": 70242.5,
+      "leanMass": 66928.5,
+      "totalMass": 85234.1
+    },
+    "trunk": {
+      "bmc": 934.92,
+      "fatMass": 7058.9,
+      "fatPercent": 17.6,
+      "leanBMC": 33000.7,
+      "leanMass": 32065.7,
+      "totalMass": 40059.6
+    }
+  },
+  "isRead": false,
+  "createdAt": {
+    "$date": "2024-11-08T18:23:57.151Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-08T18:23:57.151Z"
+  },
+  "score": 72.09
+}

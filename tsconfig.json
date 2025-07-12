@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "target": "ESNext",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./",
+    "incremental": false,
+    "strict": false,
+    "esModuleInterop": true,
+    "noEmit": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+    // "paths": {
+    //   "@/middlewares/*": ["src/middlewares/*"],
+    //   "@/models/*": ["src/models/*"],
+    //   "@/modules/*": ["src/modules/*"],
+    //   "@/routes/*": ["src/routes/*"],
+    //   "@/services/*": ["src/services/*"],
+    //   "@/utils/*": ["src/utils/*"],
+    //   "@/interfaces/*": ["src/shared/interfaces/*"],
+    //   "@/dtos/*": ["src/shared/dtos/*"],
+    //   "@/enums/*": ["src/shared/enums/*"]
+    // }
+  },
+  "include": ["src/**/*.ts", "src/shared/interfaces/AppType.enum.ts", "src/interfaces/AuthRequest.interface.ts"],
+  "exclude": ["node_modules", "dist", "test"],
+  "extends": "fastify-tsconfig"
+}
