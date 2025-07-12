@@ -1,16 +1,18 @@
 import { FastifyInstance } from 'fastify';
 
 import ChatbotRoute from '../modules/chatbot/Chatbot.route';
+import DocumentsRoute from '../modules/documents/Documents.route';
 
 async function routes(fastify: FastifyInstance) {
   fastify.register(ChatbotRoute);
+  fastify.register(DocumentsRoute);
 
   fastify.setErrorHandler((error, request, reply) => {
     if (error.code === 'LIMIT_FILE_SIZE') {
       return reply.status(400).send({
         statusCode: 400,
         error: 'Bad Request',
-        message: 'File too large. Maximum allowed size is 5MB.',
+        message: 'File too large. Maximum allowed size is 10MB.',
       });
     }
 

@@ -34,19 +34,22 @@ const start = async () => {
       .then(async () => {
         console.log('Connected to MongoDB');
 
-        const coll = mongoose.connection.db.collection('chatbotmessages');
-        const wantedName = 'default';
-
-        const already = await coll
-          .listSearchIndexes(wantedName)
+        // Create vector search indexes for both collections
+        const chatbotColl = mongoose.connection.db.collection('chatbotmessages');
+        const documentsColl = mongoose.connection.db.collection('documentchunks');
+        
+        // Check and create chatbot messages index
+        const chatbotIndexName = 'default';
+        const chatbotIndexes = await chatbotColl
+          .listSearchIndexes(chatbotIndexName)
           .toArray()
           .catch(() => []);
 
-        if (already.length === 0) {
-          console.log('🛈 Vector index not found, creating…');
+        if (chatbotIndexes.length === 0) {
+          console.log('🛈 Chatbot vector index not found, creating…');
 
-          await coll.createSearchIndex({
-            name: wantedName,
+          await chatbotColl.createSearchIndex({
+            name: chatbotIndexName,
             definition: {
               fields: [
                 {
@@ -63,9 +66,50 @@ const start = async () => {
             },
           });
 
-          console.log('🛈 Index submitted: it will take 1-3 min to be ACTIVE.');
+          console.log('🛈 Chatbot index submitted: it will take 1-3 min to be ACTIVE.');
         } else {
-          console.log('🛈 Vector index already exists.');
+          console.log('🛈 Chatbot vector index already exists.');
+        }
+
+        // Check and create documents search index
+        const documentsIndexName = 'document_search';
+        const documentsIndexes = await documentsColl
+          .listSearchIndexes(documentsIndexName)
+          .toArray()
+          .catch(() => []);
+
+        if (documentsIndexes.length === 0) {
+          console.log('🛈 Documents vector index not found, creating…');
+
+          await documentsColl.createSearchIndex({
+            name: documentsIndexName,
+            definition: {
+              fields: [
+                {
+                  type: 'vector',
+                  path: 'embedding',
+                  numDimensions: 1536,
+                  similarity: 'cosine',
+                },
+                {
+                  type: 'string',
+                  path: 'patientId',
+                },
+                {
+                  type: 'string',
+                  path: 'content',
+                },
+                {
+                  type: 'string',
+                  path: 'documentName',
+                },
+              ],
+            },
+          });
+
+          console.log('🛈 Documents index submitted: it will take 1-3 min to be ACTIVE.');
+        } else {
+          console.log('🛈 Documents vector index already exists.');
         }
       })
       .catch((err) => console.error('Failed to connect to MongoDB', err));
