@@ -1,4 +1,4 @@
-import { QdrantClient } from '@qdrant/js-client-rest';
+const { QdrantClient } = require('@qdrant/js-client-rest');
 
 export interface QdrantPoint {
   id: string;
@@ -24,7 +24,7 @@ export interface SearchResult {
 }
 
 export class QdrantService {
-  private static client: QdrantClient;
+  private static client: typeof QdrantClient;
   private static readonly COLLECTION_NAME = 'medical_documents';
 
   static initialize() {
