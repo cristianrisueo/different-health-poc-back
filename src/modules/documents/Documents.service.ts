@@ -7,24 +7,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { DocumentChunk, IDocumentChunk } from '../../models/DocumentChunk.model';
 import { PdfProcessor } from '../../utils/PdfProcessor.util';
 import { ChunkingStrategy } from '../../utils/ChunkingStrategy.util';
-import { 
-  ProcessedDocument, 
-  DocumentChunkData, 
-  QueryResult 
-} from './Documents.interface';
+import { QdrantService, QdrantPoint } from '../../utils/QdrantService.util';
+import { ProcessedDocument, DocumentChunkData, QueryResult } from './Documents.interface';
 
 export class DocumentsService {
   private static embeddings = new OpenAIEmbeddings();
-  private static llm = new ChatOpenAI({ 
-    modelName: 'gpt-4-turbo-preview', 
-    temperature: 0 
+  private static llm = new ChatOpenAI({
+    modelName: 'gpt-4-turbo-preview',
+    temperature: 0,
   });
 
-  static async uploadDocument(
-    buffer: Buffer, 
-    filename: string, 
-    patientId: string
-  ): Promise<ProcessedDocument> {
+  static async uploadDocument(buffer: Buffer, filename: string, patientId: string): Promise<ProcessedDocument> {
     try {
       // Validate PDF
       if (!PdfProcessor.validatePdf(buffer)) {
@@ -33,14 +26,14 @@ export class DocumentsService {
 
       // Extract text from PDF
       const pdfResult = await PdfProcessor.extractText(buffer);
-      
+
       if (!pdfResult.text || pdfResult.text.trim().length === 0) {
         throw new Error('PDF contains no extractable text');
       }
 
       // Generate unique document ID
       const documentId = uuidv4();
-      
+
       // Estimate document type
       const documentType = PdfProcessor.estimateDocumentType(pdfResult.text, filename);
 
@@ -56,10 +49,10 @@ export class DocumentsService {
       }
 
       // Generate embeddings for all chunks
-      const chunkTexts = chunks.map(chunk => chunk.content);
+      const chunkTexts = chunks.map((chunk) => chunk.content);
       const embeddings = await this.embeddings.embedDocuments(chunkTexts);
 
-      // Prepare document chunks for database
+      // Prepare document chunks for MongoDB
       const documentChunks: Partial<IDocumentChunk>[] = chunks.map((chunk, index) => ({
         patientId,
         documentId,
@@ -68,14 +61,35 @@ export class DocumentsService {
         content: chunk.content,
         embedding: embeddings[index],
         metadata: {
-          pageNumber: Math.floor(chunk.metadata.startPosition / 2000) + 1, // Rough estimate
+          pageNumber: Math.floor(chunk.metadata.startPosition / 2000) + 1,
           documentType,
           uploadDate: new Date(),
         },
       }));
 
-      // Save to database
+      // Prepare points for Qdrant
+      const qdrantPoints: QdrantPoint[] = chunks.map((chunk, index) => ({
+        id: `${documentId}_${chunk.index}`,
+        vector: embeddings[index],
+        payload: {
+          patientId,
+          documentId,
+          documentName: filename,
+          chunkIndex: chunk.index,
+          content: chunk.content,
+          metadata: {
+            pageNumber: Math.floor(chunk.metadata.startPosition / 2000) + 1,
+            documentType,
+            uploadDate: new Date().toISOString(),
+          },
+        },
+      }));
+
+      // Save to MongoDB (for document management)
       await DocumentChunk.insertMany(documentChunks);
+
+      // Save to Qdrant (for vector search)
+      await QdrantService.addPoints(qdrantPoints);
 
       return {
         documentId,
@@ -84,59 +98,30 @@ export class DocumentsService {
         totalChunks: chunks.length,
         uploadDate: new Date(),
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error processing document:', error);
       throw new Error(`Failed to process document: ${error.message}`);
     }
   }
 
-  static async queryDocuments(
-    patientId: string, 
-    question: string
-  ): Promise<QueryResult> {
+  static async queryDocuments(patientId: string, question: string): Promise<QueryResult> {
     try {
       // Generate embedding for the question
       const questionEmbedding = await this.embeddings.embedQuery(question);
 
-      // Perform vector search with patient filter
-      const pipeline = [
-        {
-          $vectorSearch: {
-            index: 'document_search',
-            path: 'embedding',
-            queryVector: questionEmbedding,
-            numCandidates: 100,
-            limit: 5,
-            filter: { patientId: { $eq: patientId } }
-          }
-        },
-        {
-          $addFields: {
-            score: { $meta: 'vectorSearchScore' }
-          }
-        },
-        {
-          $project: {
-            content: 1,
-            documentName: 1,
-            metadata: 1,
-            score: 1
-          }
-        }
-      ];
+      // Perform vector search with Qdrant
+      const searchResults = await QdrantService.searchSimilar(questionEmbedding, patientId, 5);
 
-      const relevantChunks = await DocumentChunk.aggregate(pipeline);
-
-      if (relevantChunks.length === 0) {
+      if (searchResults.length === 0) {
         return {
           answer: 'No relevant documents found for this patient. Please upload medical documents first.',
-          relevantChunks: []
+          relevantChunks: [],
         };
       }
 
       // Prepare context from relevant chunks
-      const context = relevantChunks
-        .map((chunk, index) => `Document: ${chunk.documentName}\nContent: ${chunk.content}`)
+      const context = searchResults
+        .map((result) => `Document: ${result.payload.documentName}\nContent: ${result.payload.content}`)
         .join('\n\n---\n\n');
 
       // Generate answer using LLM
@@ -167,13 +152,13 @@ export class DocumentsService {
 
       return {
         answer: response.content as string,
-        relevantChunks: relevantChunks.map(chunk => ({
-          documentName: chunk.documentName,
-          content: chunk.content.substring(0, 200) + '...', // Truncate for response
-          score: chunk.score,
+        relevantChunks: searchResults.map((result) => ({
+          documentName: result.payload.documentName,
+          content: result.payload.content.substring(0, 200) + '...',
+          score: result.score,
         })),
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error querying documents:', error);
       throw new Error(`Failed to query documents: ${error.message}`);
     }
@@ -181,7 +166,7 @@ export class DocumentsService {
 
   static async listDocuments(patientId: string): Promise<ProcessedDocument[]> {
     try {
-      const pipeline = [
+      const pipeline: any[] = [
         { $match: { patientId } },
         {
           $group: {
@@ -190,21 +175,21 @@ export class DocumentsService {
             patientId: { $first: '$patientId' },
             totalChunks: { $sum: 1 },
             uploadDate: { $first: '$metadata.uploadDate' },
-          }
+          },
         },
-        { $sort: { uploadDate: -1 } }
+        { $sort: { uploadDate: -1 } },
       ];
 
       const documents = await DocumentChunk.aggregate(pipeline);
 
-      return documents.map(doc => ({
+      return documents.map((doc: any) => ({
         documentId: doc._id,
         documentName: doc.documentName,
         patientId: doc.patientId,
         totalChunks: doc.totalChunks,
         uploadDate: doc.uploadDate,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error listing documents:', error);
       throw new Error(`Failed to list documents: ${error.message}`);
     }
@@ -212,13 +197,17 @@ export class DocumentsService {
 
   static async deleteDocument(documentId: string, patientId: string): Promise<boolean> {
     try {
-      const result = await DocumentChunk.deleteMany({ 
-        documentId, 
-        patientId 
+      // Delete from MongoDB
+      const result = await DocumentChunk.deleteMany({
+        documentId,
+        patientId,
       });
 
+      // Delete from Qdrant
+      await QdrantService.deleteByDocument(documentId, patientId);
+
       return result.deletedCount > 0;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error deleting document:', error);
       throw new Error(`Failed to delete document: ${error.message}`);
     }
@@ -238,9 +227,9 @@ export class DocumentsService {
             totalChunks: { $sum: 1 },
             documentIds: { $addToSet: '$documentId' },
             documentTypes: { $push: '$metadata.documentType' },
-          }
-        }
-      ]);
+          },
+        },
+      ] as any[]);
 
       if (stats.length === 0) {
         return {
@@ -261,7 +250,7 @@ export class DocumentsService {
         totalChunks: stat.totalChunks,
         documentTypes: documentTypeCounts,
       };
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error getting document stats:', error);
       throw new Error(`Failed to get document stats: ${error.message}`);
     }
