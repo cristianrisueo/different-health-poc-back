@@ -40,6 +40,8 @@ export interface ProcessedDocument {
   documentId: string;
   documentName: string;
   patientId: string;
+  fileSize?: number;
+  documentType?: string;
   totalChunks: number;
   uploadDate: Date;
 }

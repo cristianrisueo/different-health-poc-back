@@ -55,9 +55,49 @@ export class QdrantService {
           },
         });
 
+        // Create indexes for filtering fields
+        await this.client.createPayloadIndex(this.COLLECTION_NAME, {
+          field_name: 'patientId',
+          field_schema: 'keyword',
+        });
+
+        await this.client.createPayloadIndex(this.COLLECTION_NAME, {
+          field_name: 'documentId', 
+          field_schema: 'keyword',
+        });
+
         console.log(`✅ Qdrant collection created successfully`);
       } else {
         console.log(`✅ Qdrant collection already exists`);
+        
+        // Ensure required indexes exist even if collection already exists
+        try {
+          await this.client.createPayloadIndex(this.COLLECTION_NAME, {
+            field_name: 'patientId',
+            field_schema: 'keyword',
+          });
+          console.log(`✅ Created patientId index`);
+        } catch (error: any) {
+          if (error.message?.includes('already exists')) {
+            console.log(`✅ patientId index already exists`);
+          } else {
+            console.error('❌ Error creating patientId index:', error);
+          }
+        }
+
+        try {
+          await this.client.createPayloadIndex(this.COLLECTION_NAME, {
+            field_name: 'documentId',
+            field_schema: 'keyword',
+          });
+          console.log(`✅ Created documentId index`);
+        } catch (error: any) {
+          if (error.message?.includes('already exists')) {
+            console.log(`✅ documentId index already exists`);
+          } else {
+            console.error('❌ Error creating documentId index:', error);
+          }
+        }
       }
     } catch (error) {
       console.error('❌ Error setting up Qdrant collection:', error);

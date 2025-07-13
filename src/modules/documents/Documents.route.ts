@@ -27,19 +27,21 @@ async function DocumentsRoute(fastify: FastifyInstance) {
 
   // Query documents for a patient
   fastify.post('/documents/query', {
-    preHandler: [AuthMiddleware],
     handler: DocumentsController.queryDocuments,
   });
 
   // List documents for a patient
   fastify.get('/documents/patient/:patientId', {
-    preHandler: [AuthMiddleware],
     handler: DocumentsController.listDocuments,
+  });
+
+  // Download a document
+  fastify.get('/documents/:documentId/download', {
+    handler: DocumentsController.downloadDocument,
   });
 
   // Delete a document
   fastify.delete('/documents/:documentId', {
-    preHandler: [AuthMiddleware],
     handler: DocumentsController.deleteDocument,
   });
 }

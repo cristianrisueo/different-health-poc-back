@@ -151,6 +151,52 @@ export class DocumentsController {
     }
   }
 
+  static async downloadDocument(request: any, reply: FastifyReply) {
+    try {
+      const { documentId } = request.params;
+      const { patientId } = request.query;
+
+      // Validate request
+      if (!documentId) {
+        return reply.status(400).send({
+          error: 'Missing documentId',
+          message: 'Document ID is required',
+        });
+      }
+
+      if (!patientId) {
+        return reply.status(400).send({
+          error: 'Missing patientId',
+          message: 'Patient ID is required',
+        });
+      }
+
+      // Get document
+      const document = await DocumentsService.getDocument(documentId, patientId);
+
+      if (!document) {
+        return reply.status(404).send({
+          error: 'Document not found',
+          message: 'Document not found for this patient',
+        });
+      }
+
+      // Set appropriate headers for PDF download
+      reply.header('Content-Type', 'application/pdf');
+      reply.header('Content-Disposition', `attachment; filename="${document.documentName}"`);
+      reply.header('Content-Length', document.fileSize.toString());
+
+      // Send the PDF buffer
+      reply.send(document.originalBuffer);
+    } catch (error) {
+      console.error('Error in downloadDocument:', error);
+      reply.status(500).send({
+        error: 'Download failed',
+        message: 'Failed to download document. Please try again.',
+      });
+    }
+  }
+
   static async deleteDocument(request: any, reply: FastifyReply) {
     try {
       const { documentId } = request.params;

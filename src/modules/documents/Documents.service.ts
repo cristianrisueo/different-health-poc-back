@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DocumentChunk, IDocumentChunk } from '../../models/DocumentChunk.model';
+import { DocumentModel, IDocument } from '../../models/Document.model';
 import { PdfProcessor } from '../../utils/PdfProcessor.util';
 import { ChunkingStrategy } from '../../utils/ChunkingStrategy.util';
 import { QdrantService, QdrantPoint } from '../../utils/QdrantService.util';
@@ -85,6 +86,22 @@ export class DocumentsService {
         },
       }));
 
+      // Save original document to MongoDB
+      const document = new DocumentModel({
+        documentId,
+        patientId,
+        documentName: filename,
+        fileSize: buffer.length,
+        documentType,
+        originalBuffer: buffer,
+        metadata: {
+          uploadDate: new Date(),
+          mimeType: 'application/pdf',
+          totalChunks: chunks.length,
+        },
+      });
+      await document.save();
+
       // Save to MongoDB (for document management)
       await DocumentChunk.insertMany(documentChunks);
 
@@ -164,30 +181,34 @@ export class DocumentsService {
     }
   }
 
+  static async getDocument(documentId: string, patientId: string): Promise<IDocument | null> {
+    try {
+      const document = await DocumentModel.findOne({
+        documentId,
+        patientId,
+      });
+
+      return document;
+    } catch (error: any) {
+      console.error('Error getting document:', error);
+      throw new Error(`Failed to get document: ${error.message}`);
+    }
+  }
+
   static async listDocuments(patientId: string): Promise<ProcessedDocument[]> {
     try {
-      const pipeline: any[] = [
-        { $match: { patientId } },
-        {
-          $group: {
-            _id: '$documentId',
-            documentName: { $first: '$documentName' },
-            patientId: { $first: '$patientId' },
-            totalChunks: { $sum: 1 },
-            uploadDate: { $first: '$metadata.uploadDate' },
-          },
-        },
-        { $sort: { uploadDate: -1 } },
-      ];
-
-      const documents = await DocumentChunk.aggregate(pipeline);
+      const documents = await DocumentModel.find({ patientId })
+        .select('documentId documentName fileSize documentType metadata')
+        .sort({ 'metadata.uploadDate': -1 });
 
       return documents.map((doc: any) => ({
-        documentId: doc._id,
+        documentId: doc.documentId,
         documentName: doc.documentName,
         patientId: doc.patientId,
-        totalChunks: doc.totalChunks,
-        uploadDate: doc.uploadDate,
+        fileSize: doc.fileSize,
+        documentType: doc.documentType,
+        totalChunks: doc.metadata.totalChunks,
+        uploadDate: doc.metadata.uploadDate,
       }));
     } catch (error: any) {
       console.error('Error listing documents:', error);
@@ -197,8 +218,14 @@ export class DocumentsService {
 
   static async deleteDocument(documentId: string, patientId: string): Promise<boolean> {
     try {
-      // Delete from MongoDB
-      const result = await DocumentChunk.deleteMany({
+      // Delete original document from MongoDB
+      const documentResult = await DocumentModel.deleteOne({
+        documentId,
+        patientId,
+      });
+
+      // Delete chunks from MongoDB
+      const chunksResult = await DocumentChunk.deleteMany({
         documentId,
         patientId,
       });
@@ -206,7 +233,7 @@ export class DocumentsService {
       // Delete from Qdrant
       await QdrantService.deleteByDocument(documentId, patientId);
 
-      return result.deletedCount > 0;
+      return documentResult.deletedCount > 0;
     } catch (error: any) {
       console.error('Error deleting document:', error);
       throw new Error(`Failed to delete document: ${error.message}`);
