@@ -115,7 +115,9 @@ RESPUESTA (en español, profesional y empática):
       // Prepare sources for response
       const sources: DocumentSource[] = searchResults.map((result) => ({
         documentName: result.payload.documentName,
-        relevantContent: result.payload.content.substring(0, 200) + '...',
+        relevantContent: result.payload.content.length > 500 
+          ? result.payload.content.substring(0, 500) + '...'
+          : result.payload.content,
         confidence: result.score,
       }));
 
