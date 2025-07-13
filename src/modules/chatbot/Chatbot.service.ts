@@ -14,11 +14,7 @@ export class ChatbotService {
     temperature: 0.1,
   });
 
-  static async askWithRAG(
-    message: string, 
-    patientId: string, 
-    userId?: string
-  ): Promise<ChatResponse> {
+  static async askWithRAG(message: string, patientId: string, userId?: string): Promise<ChatResponse> {
     try {
       console.log('🤖 Starting RAG query for patient:', patientId);
       console.log('❓ Question:', message);
@@ -93,7 +89,7 @@ ${result.payload.content}
 Eres un asistente médico especializado que ayuda a médicos analizando documentos médicos de pacientes.
 
 CARACTERÍSTICAS IMPORTANTES:
-- Respondes EXCLUSIVAMENTE en español
+- Respondes EXCLUSIVAMENTE en inglés
 - Eres profesional, preciso y claro en tus análisis médicos
 - Te basas ÚNICAMENTE en los documentos médicos proporcionados
 - Proporcionas análisis médicos detallados para profesionales de la salud
@@ -128,7 +124,7 @@ DOCUMENTOS MÉDICOS DEL PACIENTE:
 
 CONSULTA MÉDICA: {question}
 
-ANÁLISIS MÉDICO (en español, profesional, objetivo y en formato Markdown estructurado):
+ANÁLISIS MÉDICO (en inglés, profesional, objetivo y en formato Markdown estructurado):
 `);
 
       const chain = medicalPrompt.pipe(this.llm);
@@ -140,9 +136,10 @@ ANÁLISIS MÉDICO (en español, profesional, objetivo y en formato Markdown estr
       // Prepare sources for response
       const sources: DocumentSource[] = searchResults.map((result) => ({
         documentName: result.payload.documentName,
-        relevantContent: result.payload.content.length > 500 
-          ? result.payload.content.substring(0, 500) + '...'
-          : result.payload.content,
+        relevantContent:
+          result.payload.content.length > 500
+            ? result.payload.content.substring(0, 500) + '...'
+            : result.payload.content,
         confidence: result.score,
       }));
 
@@ -171,7 +168,7 @@ ANÁLISIS MÉDICO (en español, profesional, objetivo y en formato Markdown estr
     userMessage: string,
     assistantResponse: string,
     patientId: string,
-    sources?: DocumentSource[]
+    sources?: DocumentSource[],
   ): Promise<void> {
     try {
       if (!userId) return;
@@ -216,14 +213,14 @@ ANÁLISIS MÉDICO (en español, profesional, objetivo y en formato Markdown estr
   }
 
   // Legacy method for backwards compatibility
-  static async invoke(params: { 
-    input: string; 
-    sessionId: string; 
+  static async invoke(params: {
+    input: string;
+    sessionId: string;
     userId: string;
     patientId?: string;
   }): Promise<{ output: string }> {
     const { input, userId, patientId } = params;
-    
+
     if (patientId) {
       const result = await this.askWithRAG(input, patientId, userId);
       return { output: result.response };
