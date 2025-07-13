@@ -50,13 +50,22 @@ export class ChatbotService {
 
       // If no relevant documents found
       if (searchResults.length === 0) {
-        const response = `No encuentro documentos médicos relevantes para tu consulta en tu historial. 
+        const response = `## 📋 No se encontraron documentos médicos relevantes
 
-Para poder ayudarte con información específica sobre tu salud, necesito que:
-1. Subas tus documentos médicos (análisis, estudios, reportes)
-2. Realices consultas específicas basadas en esos documentos
+No se encontraron documentos médicos relevantes para esta consulta en el historial del paciente. 
 
-¿Te gustaría que te ayude con algo más general sobre salud o tienes documentos que necesitas subir?`;
+### 📤 Para poder realizar el análisis médico necesita:
+
+1. **Subir documentos médicos del paciente** (análisis, estudios, reportes, historiales)
+2. **Realizar consultas específicas** basadas en esos documentos clínicos
+
+### 💡 Opciones disponibles:
+
+- Puede realizar **consultas generales sobre interpretación médica**
+- Puede **subir documentos médicos** para análisis clínico específico
+- Puede solicitar **orientación sobre tipos de estudios diagnósticos**
+
+¿Necesita ayuda con alguna consulta médica general o tiene documentos del paciente para analizar? 📄`;
 
         // Save conversation without medical context
         await this.saveConversation(conversationId, userId, message, response, patientId);
@@ -79,31 +88,47 @@ ${result.payload.content}
         })
         .join('\n');
 
-      // Generate medical response using enhanced prompt
+      // Generate medical response using enhanced prompt with Markdown formatting
       const medicalPrompt = ChatPromptTemplate.fromTemplate(`
-Eres un asistente médico especializado que analiza documentos médicos del paciente. 
+Eres un asistente médico especializado que ayuda a médicos analizando documentos médicos de pacientes.
 
 CARACTERÍSTICAS IMPORTANTES:
 - Respondes EXCLUSIVAMENTE en español
-- Eres empático, profesional y claro en tus explicaciones
+- Eres profesional, preciso y claro en tus análisis médicos
 - Te basas ÚNICAMENTE en los documentos médicos proporcionados
-- Explicas términos médicos de manera comprensible
-- Si no encuentras información específica, lo dices claramente
-- SIEMPRE recomiendas consultar con el médico tratante
+- Proporcionas análisis médicos detallados para profesionales de la salud
+- Si no encuentras información específica, lo especificas claramente
+- Ofreces interpretaciones clínicas relevantes para el diagnóstico y tratamiento
+
+INSTRUCCIONES DE FORMATO MARKDOWN:
+- Usa formato Markdown para estructurar tu respuesta de manera clara y profesional
+- Incluye headers (##) para secciones principales
+- Usa listas con bullets (-) y números (1.) donde sea apropiado
+- Resalta datos importantes con **negrita**
+- Usa emojis apropiados para mejorar la legibilidad (✅ ⚠️ 📊 💪 🏆 etc.)
+- Estructura la información de forma clara y organizada
+
+ESTRUCTURA SUGERIDA CUANDO SEA APROPIADO:
+- Header principal con tipo de análisis o tema consultado
+- Sección de datos del paciente si están disponibles
+- Resultados principales organizados por categorías
+- Interpretación clínica y hallazgos relevantes
+- Sugerencias para seguimiento o estudios adicionales
 
 INSTRUCCIONES ESPECÍFICAS:
 - Analiza cuidadosamente los documentos médicos proporcionados
-- Responde a la pregunta del paciente basándote en esos documentos
-- Si los documentos no contienen la información solicitada, explica qué tipo de estudio o análisis sería necesario
-- Proporciona recomendaciones generales cuando sea apropiado
-- Usa un tono comprensivo y profesional
+- Responde a la consulta médica basándote en esos documentos
+- Si los documentos no contienen la información solicitada, indica qué tipo de estudio o análisis sería necesario
+- Proporciona interpretaciones clínicas relevantes para el diagnóstico
+- Usa terminología médica apropiada para profesionales de la salud
+- Mantén un tono profesional y objetivo
 
 DOCUMENTOS MÉDICOS DEL PACIENTE:
 {context}
 
-PREGUNTA DEL PACIENTE: {question}
+CONSULTA MÉDICA: {question}
 
-RESPUESTA (en español, profesional y empática):
+ANÁLISIS MÉDICO (en español, profesional, objetivo y en formato Markdown estructurado):
 `);
 
       const chain = medicalPrompt.pipe(this.llm);
@@ -205,11 +230,20 @@ RESPUESTA (en español, profesional y empática):
     }
 
     // Fallback for general health questions without patient context
-    const generalResponse = `Hola! Soy tu asistente médico especializado. 
+    const generalResponse = `## 👋 ¡Hola! Soy su asistente médico especializado
 
-Para poder ayudarte con información específica sobre tu salud, necesito que proporciones tu ID de paciente y que hayas subido tus documentos médicos.
+### 📋 Para realizar análisis médicos necesito:
 
-¿Te gustaría que te ayude con alguna consulta general sobre salud?`;
+1. **ID del paciente** 
+2. **Documentos médicos del paciente** (análisis, estudios, reportes, historiales)
+
+### 💬 ¿En qué puedo ayudarle?
+
+- **Consultas generales sobre interpretación médica**
+- **Explicaciones sobre tipos de estudios diagnósticos**
+- **Orientación sobre hallazgos clínicos**
+
+¿Necesita ayuda con alguna consulta médica general? 🩺`;
 
     return { output: generalResponse };
   }
