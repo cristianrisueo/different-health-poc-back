@@ -1,46 +1,55 @@
 import { FastifyReply } from 'fastify';
 
 import { DocumentsService } from './Documents.service';
-import { 
-  UploadDocumentRequest, 
-  QueryDocumentRequest, 
-  ListDocumentsRequest 
-} from './Documents.interface';
+import { UploadDocumentRequest, QueryDocumentRequest, ListDocumentsRequest } from './Documents.interface';
 
 export class DocumentsController {
   static async uploadDocument(request: UploadDocumentRequest, reply: FastifyReply) {
     try {
+      console.log('📝 Upload request received');
+      console.log('📦 Body:', request.body);
+      console.log('📎 File present:', request.file ? 'YES' : 'NO');
+      console.log('👤 User:', request.user || 'NO AUTH');
+
       const { patientId } = request.body;
       const file = request.file;
 
       // Validate request
       if (!file) {
-        return reply.status(400).send({ 
+        console.log('❌ No file in request');
+        return reply.status(400).send({
           error: 'No file uploaded',
-          message: 'Please provide a PDF file to upload' 
+          message: 'Please provide a PDF file to upload',
         });
       }
 
       if (!patientId) {
-        return reply.status(400).send({ 
+        console.log('❌ No patientId in request');
+        return reply.status(400).send({
           error: 'Missing patientId',
-          message: 'Patient ID is required' 
+          message: 'Patient ID is required',
         });
       }
 
       if (file.mimetype !== 'application/pdf') {
-        return reply.status(400).send({ 
+        console.log('❌ Invalid file type:', file.mimetype);
+        return reply.status(400).send({
           error: 'Invalid file type',
-          message: 'Only PDF files are supported' 
+          message: 'Only PDF files are supported',
         });
       }
 
+      console.log('✅ Validation passed, processing document...');
+      console.log('📄 File details:', {
+        name: file.originalname,
+        size: file.size,
+        type: file.mimetype,
+      });
+
       // Process the document
-      const result = await DocumentsService.uploadDocument(
-        file.buffer,
-        file.originalname,
-        patientId
-      );
+      const result = await DocumentsService.uploadDocument(file.buffer, file.originalname, patientId);
+
+      console.log('🎉 Document processed successfully');
 
       reply.send({
         success: true,
@@ -48,10 +57,10 @@ export class DocumentsController {
         data: result,
       });
     } catch (error) {
-      console.error('Error in uploadDocument:', error);
-      
-      if (error.message.includes('Invalid PDF') || 
-          error.message.includes('no extractable text')) {
+      console.error('❌ Error in uploadDocument:', error);
+      console.error('❌ Stack trace:', error.stack);
+
+      if (error.message.includes('Invalid PDF') || error.message.includes('no extractable text')) {
         return reply.status(400).send({
           error: 'Invalid document',
           message: error.message,
@@ -61,6 +70,7 @@ export class DocumentsController {
       reply.status(500).send({
         error: 'Upload failed',
         message: 'Failed to process the document. Please try again.',
+        details: error.message, // ← Añadir detalles para debugging
       });
     }
   }
@@ -71,23 +81,23 @@ export class DocumentsController {
 
       // Validate request
       if (!patientId) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Missing patientId',
-          message: 'Patient ID is required' 
+          message: 'Patient ID is required',
         });
       }
 
       if (!question || question.trim().length === 0) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Missing question',
-          message: 'Question is required' 
+          message: 'Question is required',
         });
       }
 
       if (question.length > 1000) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Question too long',
-          message: 'Question must be less than 1000 characters' 
+          message: 'Question must be less than 1000 characters',
         });
       }
 
@@ -113,9 +123,9 @@ export class DocumentsController {
 
       // Validate request
       if (!patientId) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Missing patientId',
-          message: 'Patient ID is required' 
+          message: 'Patient ID is required',
         });
       }
 
@@ -148,16 +158,16 @@ export class DocumentsController {
 
       // Validate request
       if (!documentId) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Missing documentId',
-          message: 'Document ID is required' 
+          message: 'Document ID is required',
         });
       }
 
       if (!patientId) {
-        return reply.status(400).send({ 
+        return reply.status(400).send({
           error: 'Missing patientId',
-          message: 'Patient ID is required' 
+          message: 'Patient ID is required',
         });
       }
 

@@ -21,7 +21,7 @@ const upload = multer({
 async function DocumentsRoute(fastify: FastifyInstance) {
   // Upload PDF document
   fastify.post('/documents/upload', {
-    preHandler: [AuthMiddleware, upload.single('file')],
+    preHandler: [upload.single('file')],
     handler: DocumentsController.uploadDocument,
   });
 

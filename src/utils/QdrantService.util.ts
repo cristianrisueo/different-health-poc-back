@@ -1,4 +1,5 @@
 const { QdrantClient } = require('@qdrant/js-client-rest');
+import { v4 as uuidv4 } from 'uuid';
 
 export interface QdrantPoint {
   id: string;
@@ -24,7 +25,7 @@ export interface SearchResult {
 }
 
 export class QdrantService {
-  private static client: typeof QdrantClient;
+  private static client: any; // ← Fix: usar 'any' en lugar del tipo
   private static readonly COLLECTION_NAME = 'medical_documents';
 
   static initialize() {
@@ -69,10 +70,19 @@ export class QdrantService {
       this.initialize();
 
       const qdrantPoints = points.map((point) => ({
-        id: point.id,
+        id: uuidv4(), // ← FIX: Generar UUID único para cada punto
         vector: point.vector,
-        payload: point.payload,
+        payload: {
+          ...point.payload,
+          originalId: point.id, // ← Guardar el ID original en el payload
+        },
       }));
+
+      console.log(`📝 Adding ${qdrantPoints.length} points to Qdrant`);
+      console.log(
+        `🔑 Sample IDs:`,
+        qdrantPoints.slice(0, 2).map((p) => p.id),
+      );
 
       await this.client.upsert(this.COLLECTION_NAME, {
         wait: true,
